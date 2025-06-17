@@ -173,7 +173,7 @@
                                                 Cancel
                                             </a>
                                             <button type="submit" class="btn btn-primary">
-                                                Save
+                                                Add
                                             </button>
                                         </div>
                                      </div>

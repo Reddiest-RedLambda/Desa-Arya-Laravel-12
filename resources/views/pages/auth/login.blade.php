@@ -19,13 +19,19 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-gradient-primary">
-    {{-- @if ($errors->any())
-        @dd($errors->all())
-    @endif --}}
+    @if ($errors->any())
+        <script>
+                Swal.fire({
+                    title: "Access Denied",
+                    text: "@foreach($errors->all() as $error) {{ $error }}{{ $loop->last ? '.' : ',' }} @endforeach",
+                    icon: "error"
+                });
+            </script>
+    @endif
     <div class="container">
 
         <!-- Outer Row -->
@@ -41,9 +47,9 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
                                     </div>
-                                    <form class="user" action="/login" method="POST">
+                                    <form class="user" action="/login" method="POST" onsubmit="const submitBtn = document.getElementById('submitBtn'); submitBtn.disabled = true; submitBtn.textContent = 'Loading...'">
                                         @csrf
                                         @method('POST')
                                         <div class="form-group">
@@ -55,12 +61,11 @@
                                             <input type="password" name="password" class="form-control form-control-user"
                                                 id="inputPassword" placeholder="Password">
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button id="submitBtn" type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                         <hr>
                                     </form>
-                                    <hr>
                                     <div class="text-center">
                                         <a class="small" href="/register">Create an Account</a>
                                     </div>
